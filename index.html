@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Has Brendan Had a Haircut?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Modern startup font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --text-main: #ffffff;
+      --text-muted: #b9c6cf;
+      --accent: #4fd1c5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .card {
+      max-width: 520px;
+      width: 90%;
+      padding: 40px 32px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .subheading {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    .days {
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .label {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .info {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 6px 0;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Has Brendan had a haircut?</h1>
+    <div class="subheading">A transparency initiative for concerned colleagues</div>
+
+    <div class="days" id="daysSince">–</div>
+    <div class="label">days since last haircut</div>
+
+    <div class="info">
+      ✂️ Last haircut: <strong id="lastDate">–</strong>
+    </div>
+
+    <div class="info">
+      📅 Next haircut scheduled: <strong id="nextDate">–</strong>
+    </div>
+
+    <footer>
+      Data maintained manually. Accuracy not guaranteed after Friday drinks.
+    </footer>
+  </div>
+
+  <script>
+    /***********************
+     * EDIT THESE DATES 👇
+     ***********************/
+    const LAST_HAIRCUT = "2026-01-24";   // YYYY-MM-DD
+    const NEXT_HAIRCUT = "TBA";   // YYYY-MM-DD
+
+    /***********************
+     * DO NOT TOUCH BELOW
+     ***********************/
+    const lastDate = new Date(LAST_HAIRCUT);
+    const today = new Date();
+
+    // Calculate full days since last haircut
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysSince = Math.floor((today - lastDate) / msPerDay);
+
+    // Format dates nicely
+    const formatDate = (dateStr) =>
+      new Date(dateStr).toLocaleDateString("en-AU", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
+
+    document.getElementById("daysSince").textContent = daysSince >= 0 ? daysSince : 0;
+    document.getElementById("lastDate").textContent = formatDate(LAST_HAIRCUT);
+    document.getElementById("nextDate").textContent = formatDate(NEXT_HAIRCUT);
+  </script>
+
+</body>
+</html>
