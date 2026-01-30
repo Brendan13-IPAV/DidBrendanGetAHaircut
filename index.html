@@ -106,35 +106,38 @@
   </div>
 
   <script>
-    /***********************
-     * EDIT THESE DATES 👇
-     ***********************/
-    const LAST_HAIRCUT = "2026-01-24";   // YYYY-MM-DD
-    const NEXT_HAIRCUT = "TBA";   // YYYY-MM-DD
+  /***********************
+   * EDIT THESE DATES 👇
+   ***********************/
+  const LAST_HAIRCUT = "2026-01-26";   // YYYY-MM-DD
+  const NEXT_HAIRCUT = null;          // YYYY-MM-DD or null if not booked
 
-    /***********************
-     * DO NOT TOUCH BELOW
-     ***********************/
-    const lastDate = new Date(LAST_HAIRCUT);
-    const today = new Date();
+  /***********************
+   * DO NOT TOUCH BELOW
+   ***********************/
+  const lastDate = new Date(LAST_HAIRCUT);
+  const today = new Date();
 
-    // Calculate full days since last haircut
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const daysSince = Math.floor((today - lastDate) / msPerDay);
+  // Calculate full days since last haircut
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysSince = Math.floor((today - lastDate) / msPerDay);
 
-    // Format dates nicely
-    const formatDate = (dateStr) =>
-      new Date(dateStr).toLocaleDateString("en-AU", {
-        weekday: "short",
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-      });
+  // Format dates nicely
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("en-AU", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
 
-    document.getElementById("daysSince").textContent = daysSince >= 0 ? daysSince : 0;
-    document.getElementById("lastDate").textContent = formatDate(LAST_HAIRCUT);
-    document.getElementById("nextDate").textContent = formatDate(NEXT_HAIRCUT);
-  </script>
+  document.getElementById("daysSince").textContent = daysSince >= 0 ? daysSince : 0;
+  document.getElementById("lastDate").textContent = formatDate(LAST_HAIRCUT);
 
-</body>
-</html>
+  const nextDateEl = document.getElementById("nextDate");
+  if (NEXT_HAIRCUT) {
+    nextDateEl.textContent = formatDate(NEXT_HAIRCUT);
+  } else {
+    nextDateEl.textContent = "not booked yet";
+  }
+</script>
